@@ -23,6 +23,7 @@ object MessengerServer extends IOApp {
 
       router <- Router(
         "/login"     -> AuthRoutes(OAuthService(yandexOAuthConfig), userRepository).routes,
+        "/messenger" -> MessengerRoutes(MessengerService(userRepository, messageRepository)).routes
       ).orNotFound.pure[IO]
 
       _ <- BlazeServerBuilder[IO]
