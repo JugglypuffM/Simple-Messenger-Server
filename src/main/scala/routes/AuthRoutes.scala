@@ -13,7 +13,7 @@ import repositories.user.UserRepository
 import services.OAuthService
 
 class AuthRoutes(oauthClient: OAuthService, userRepository: UserRepository[IO]) {
-  implicit val userEncoder: Encoder[User] = deriveEncoder[User]
+  implicit val userEncoder: Encoder[User]                 = deriveEncoder[User]
   implicit val userEntityEncoder: EntityEncoder[IO, User] = jsonEncoderOf[IO, User]
 
   val routes: HttpRoutes[IO] = HttpRoutes.of[IO] {
