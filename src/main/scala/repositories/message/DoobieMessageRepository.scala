@@ -30,11 +30,11 @@ class DoobieMessageRepository[F[_]: Async](xa: Transactor[F]) extends MessageRep
       WHERE sender = $sender AND recipient = $recipient
       """.query[String].to[List].transact(xa)
 
-  override def deleteUnreadMessages(recipient: String): F[Unit] =
+  override def deleteUnreadMessages(sender: String, recipient: String): F[Unit] =
     sql"""
       DELETE
       FROM messages 
-      WHERE recipient = $recipient
+      WHERE sender = $sender AND recipient = $recipient
       """.update.run.map(_ => ()).transact(xa)
 
 }

@@ -25,7 +25,7 @@ class MessengerService(userRepository: UserRepository[IO], messageRepository: Me
   def getUnreadMessages(sender: String, recipient: String): IO[List[String]] =
     for {
       messages <- messageRepository.getUnreadMessagesFrom(sender, recipient)
-      _        <- messageRepository.deleteUnreadMessages(recipient)
+      _        <- messageRepository.deleteUnreadMessages(sender, recipient)
     } yield messages
 
   def sendMessage(sender: String, recipient: String, content: String): IO[Unit] =

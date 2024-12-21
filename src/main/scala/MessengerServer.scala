@@ -27,7 +27,7 @@ object MessengerServer extends IOApp {
       ).orNotFound.pure[IO]
 
       _ <- BlazeServerBuilder[IO]
-        .bindHttp(8081, "10.76.34.221")
+        .bindHttp(8081, "192.168.1.74")
         .withHttpApp(router)
         .serve
         .compile
